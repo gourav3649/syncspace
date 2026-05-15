@@ -18,7 +18,6 @@
     "express-joi-validation": "^5.0.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.6.2",
     "socket.io": "^4.8.3",
     "uuid": "^9.0.0",
     "web-push": "^3.6.7"
