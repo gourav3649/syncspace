@@ -11,7 +11,7 @@ import {
   DeleteGroupArgs,
 } from './types';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 // const BASE_URL = "https://saliks-discord.herokuapp.com/";
 // const BASE_URL = 'http://localhost:5000/api';
 

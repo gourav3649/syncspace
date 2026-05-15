@@ -44,7 +44,7 @@ i.e, every person maintains a p2p connection with every other person in the room
 1. Clone project
 
 ```
-git clone git@github.com:saalikmubeen/SyncSpace.git
+git clone https://github.com/gourav3649/syncspace.git
 ```
 
 ## Manual
@@ -86,22 +86,3 @@ docker-compose up --build
 ```
 
 *Make sure you have docker installed*
-
-# Testimonials
-
-> Thanks everyone for trying out the app!
-
-|     |     |
-|-----|-----|
-| ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_1.png?raw=true)  | ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_2.png?raw=true)   |
-| ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_3.png?raw=true)  | ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_4.png?raw=true)   |
-| ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_5.png?raw=true)  | ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_6.png?raw=true)   |
-| ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_7.png?raw=true)  | ![image](https://github.com/saalikmubeen/SyncSpace/blob/main/screenshots/screenshot_8.png?raw=true)   |
-
-# TODOS
-
-- [x]  Enable group video and messaging functionality
-- [x]  Implement Push Notifications and make it a PWA
-- [ ]  Implement confirm email, reset password and email sending on friend invitation, *Not a big deal to implement, just a little lazy to implement it*
-- [ ]  Store messages in an encrypted form in the database. (Just wrote it for fun. I mean is it even worth to do it 🤦‍♂️)
-- [x]  Enhace the UI. I hate CSS, not that good at it 🥱😓 . (Looks reasonably good now)
