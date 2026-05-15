@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String               @id @default(uuid())
+  email            String               @unique
+  username         String?
+  password         String
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  friends          User[]               @relation("UserFriends")
+  friendsRelation  User[]               @relation("UserFriends")
+  
+  groupChats       GroupChat[]          @relation("GroupChatParticipants")
+  adminGroupChats  GroupChat[]          @relation("GroupChatAdmin")
+
+  sentInvitations  FriendInvitation[]   @relation("SentInvitations")
+  receivedInvites  FriendInvitation[]   @relation("ReceivedInvitations")
+
+  messages         Message[]
+  conversations    Conversation[]       @relation("ConversationParticipants")
+  
+  pushSubscriptions PushSubscription[]
+}
+
+model PushSubscription {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  endpoint  String
+  p256dh    String?
+  auth      String?
+}
+
+model Message {
+  id             String         @id @default(uuid())
+  content        String
+  type           String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  authorId       String
+  author         User           @relation(fields: [authorId], references: [id])
+
+  conversationId String?
+  conversation   Conversation?  @relation(fields: [conversationId], references: [id])
+  	
+  groupChatId    String?
+  groupChat      GroupChat?     @relation(fields: [groupChatId], references: [id])
+}
+
+model Conversation {
+  id           String      @id @default(uuid())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  participants User[]      @relation("ConversationParticipants")
+  messages     Message[]
+}
+
+model GroupChat {
+  id           String      @id @default(uuid())
+  name         String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  adminId      String
+  admin        User        @relation("GroupChatAdmin", fields: [adminId], references: [id])
+
+  participants User[]      @relation("GroupChatParticipants")
+  messages     Message[]
+}
+
+model FriendInvitation {
+  id           String      @id @default(uuid())
+  senderId     String
+  sender       User        @relation("SentInvitations", fields: [senderId], references: [id])
+  receiverId   String
+  receiver     User        @relation("ReceivedInvitations", fields: [receiverId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
