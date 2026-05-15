@@ -60,7 +60,7 @@ export const registerUser = (credentials: RegisterArgs) => {
 
             dispatch(
                 showAlert(
-                    `Hi 👋 ${response.userDetails.username}. Welcome to SyncSpace. I'm Saalik, the creator. You have me as a friend until you invite and add your other friends 😊.`
+                    `Hi, ${response.userDetails.username} welcome to syncspace.`
                 )
             );
         }
