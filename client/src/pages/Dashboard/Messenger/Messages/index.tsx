@@ -12,7 +12,7 @@ const Container = styled("div")({
     flexDirection: "column",
     flex: 1,
     overflow: "hidden",
-    background: "#313338",
+    background: "#171C26",
 });
 
 const ScrollArea = styled("div")({

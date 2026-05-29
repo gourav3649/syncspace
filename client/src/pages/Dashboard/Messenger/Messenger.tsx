@@ -13,7 +13,7 @@ const MainContainer = styled("div")({
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    background: "#313338",
+    background: "#171C26",
     overflow: "hidden",
     animation: `${fadeIn} 0.2s ease`,
 });

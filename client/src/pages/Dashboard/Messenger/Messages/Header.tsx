@@ -14,9 +14,9 @@ const HeaderBar = styled("div")({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "0 16px",
-    height: "56px",
-    background: "#313338",
+    padding: "0 24px",
+    height: "64px",
+    background: "#171C26",
     borderBottom: "1px solid rgba(255,255,255,0.06)",
     flexShrink: 0,
     position: "sticky",
@@ -27,26 +27,26 @@ const HeaderBar = styled("div")({
 const UserInfo = styled("div")({
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "12px",
     minWidth: 0,
 });
 
 const Actions = styled("div")({
     display: "flex",
     alignItems: "center",
-    gap: "4px",
+    gap: "8px",
     flexShrink: 0,
 });
 
 const CallBtn = styled(IconButton)({
-    color: "rgba(255,255,255,0.6)",
-    width: "36px",
-    height: "36px",
+    color: "#B8C0CC",
+    width: "40px",
+    height: "40px",
     borderRadius: "8px",
     transition: "all 0.15s ease",
     "&:hover": {
-        color: "#57F287",
-        background: "rgba(87,242,135,0.1)",
+        color: "#22C55E",
+        background: "rgba(34,197,94,0.1)",
     },
     "&:disabled": {
         color: "rgba(255,255,255,0.2)",
@@ -54,14 +54,14 @@ const CallBtn = styled(IconButton)({
 });
 
 const VideoBtn = styled(IconButton)({
-    color: "rgba(255,255,255,0.6)",
-    width: "36px",
-    height: "36px",
+    color: "#B8C0CC",
+    width: "40px",
+    height: "40px",
     borderRadius: "8px",
     transition: "all 0.15s ease",
     "&:hover": {
-        color: "#5865F2",
-        background: "rgba(88,101,242,0.1)",
+        color: "#5B73FF",
+        background: "rgba(91,115,255,0.1)",
     },
     "&:disabled": {
         color: "rgba(255,255,255,0.2)",
@@ -73,7 +73,7 @@ const OnlineBadge = styled("span")<{ online?: boolean }>((props) => ({
     width: "8px",
     height: "8px",
     borderRadius: "50%",
-    background: props.online ? "#57F287" : "rgba(255,255,255,0.25)",
+    background: props.online ? "#22C55E" : "rgba(255,255,255,0.2)",
     flexShrink: 0,
 }));
 
@@ -88,22 +88,22 @@ const MessagesHeader: React.FC<{ scrollPosition: number }> = ({ scrollPosition }
     const displayName = chosenChatDetails?.username || chosenGroupChatDetails?.groupName || "";
 
     return (
-        <HeaderBar>
+        <HeaderBar style={{ boxShadow: scrollPosition > 10 ? "0 4px 20px rgba(0,0,0,0.2)" : "none", transition: "box-shadow 0.2s" }}>
             <UserInfo>
                 {displayName && <Avatar username={displayName} />}
                 <div>
-                    <Typography sx={{ color: "#ffffff", fontWeight: 700, fontSize: "15px", lineHeight: 1.2 }}>
+                    <Typography sx={{ color: "#F5F7FB", fontWeight: 600, fontSize: "16px", lineHeight: 1.2 }}>
                         {displayName}
                     </Typography>
                     {chosenChatDetails && (
-                        <Typography sx={{ color: "rgba(255,255,255,0.4)", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}>
+                        <Typography sx={{ color: "#7D8795", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px", marginTop: "2px" }}>
                             <OnlineBadge online={isOnline} />
                             {isOnline ? "Online" : "Offline"}
                         </Typography>
                     )}
                     {chosenGroupChatDetails && (
-                        <Typography sx={{ color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>
-                            {chosenGroupChatDetails.participants?.length ?? 0} members
+                        <Typography sx={{ color: "#7D8795", fontSize: "13px", marginTop: "2px" }}>
+                            {chosenGroupChatDetails.participants?.length === 1 ? "1 member" : `${chosenGroupChatDetails.participants?.length ?? 0} members`}
                         </Typography>
                     )}
                 </div>

@@ -18,20 +18,20 @@ const FriendsTitle = ({ title }: { title: string }) => {
         <Typography
             sx={{
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.35)",
-                fontSize: "11px",
-                fontWeight: 700,
-                letterSpacing: "0.8px",
+                color: "#7D8795",
+                fontSize: "12px",
+                fontWeight: 600,
+                letterSpacing: "1px",
                 marginTop: "16px",
                 marginBottom: "4px",
                 display: "flex",
                 alignItems: "center",
-                gap: "6px",
+                gap: "8px",
                 paddingLeft: "4px",
                 userSelect: "none",
             }}
         >
-            {ICON_MAP[title] ?? <PeopleAltIcon sx={{ fontSize: 14 }} />}
+            {ICON_MAP[title] ?? <PeopleAltIcon sx={{ fontSize: 16 }} />}
             {title}
         </Typography>
     );

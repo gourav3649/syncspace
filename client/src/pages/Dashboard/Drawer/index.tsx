@@ -5,6 +5,7 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import SearchIcon from "@mui/icons-material/Search";
 import VideoChat from "../../../components/VideoChat";
 import IncomingCall from "../../../components/IncomingCall";
 import Messenger from "../Messenger/Messenger";
@@ -17,12 +18,27 @@ import CreateRoomButton from "./CreateRoomButton";
 import CreateGroupChatButton from "./CreateGroupChatButton";
 import GroupChatList from "../FriendsSideBar/GroupChatList";
 import ActiveRooms from "../ActiveRooms";
+import { styled } from "@mui/system";
 
-const drawerWidth = 260;
+const drawerWidth = 280;
 
-// Discord-inspired dark sidebar colors
-const SIDEBAR_BG = "#1e1f22";
-const SIDEBAR_SECTION_DIVIDER = "rgba(255,255,255,0.06)";
+const SIDEBAR_BG = "#131720";
+const CONTENT_BG = "#171C26";
+const SIDEBAR_SECTION_DIVIDER = "rgba(255,255,255,0.04)";
+
+const SearchBar = styled("div")({
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.2)",
+    borderRadius: "8px",
+    padding: "6px 12px",
+    margin: "16px 12px 8px 12px",
+    border: "1px solid rgba(255,255,255,0.05)",
+    color: "#B8C0CC",
+    fontSize: "13px",
+    gap: "8px",
+    cursor: "text",
+});
 
 interface Props {
     window?: () => Window;
@@ -48,7 +64,7 @@ export default function ResponsiveDrawer(props: Props) {
             style={{
                 height: "1px",
                 background: SIDEBAR_SECTION_DIVIDER,
-                margin: "8px 0",
+                margin: "12px 0",
             }}
         />
     );
@@ -66,13 +82,13 @@ export default function ResponsiveDrawer(props: Props) {
                 scrollbarColor: "rgba(255,255,255,0.1) transparent",
             }}
         >
-            {/* Top bar: Add friend + menu + collapse button */}
+            {/* Top Branding / User Area */}
             <div
                 style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    padding: "12px 12px 12px 12px",
+                    padding: "16px 16px",
                     borderBottom: `1px solid ${SIDEBAR_SECTION_DIVIDER}`,
                     position: "sticky",
                     top: 0,
@@ -80,21 +96,22 @@ export default function ResponsiveDrawer(props: Props) {
                     zIndex: 10,
                 }}
             >
-                <AddFriendButton />
+                <div style={{ color: "#F5F7FB", fontWeight: 700, fontSize: "16px" }}>
+                    SyncSpace
+                </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                     <DropDownMenu />
-                    {/* Desktop collapse button */}
                     <IconButton
                         onClick={handleDesktopToggle}
                         size="small"
                         title="Collapse sidebar"
                         sx={{
                             display: { xs: "none", sm: "flex" },
-                            color: "rgba(255,255,255,0.5)",
+                            color: "#7D8795",
                             borderRadius: "6px",
                             padding: "4px",
                             "&:hover": {
-                                color: "white",
+                                color: "#F5F7FB",
                                 background: "rgba(255,255,255,0.08)",
                             },
                         }}
@@ -104,51 +121,46 @@ export default function ResponsiveDrawer(props: Props) {
                 </div>
             </div>
 
-            {/* Action buttons */}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "10px 12px",
-                }}
-            >
-                <div style={{ flex: 1 }}>
-                    <CreateGroupChatButton />
+            <SearchBar>
+                <SearchIcon sx={{ fontSize: 16 }} />
+                <span>Find or start a conversation</span>
+            </SearchBar>
+
+            {/* Direct Messages */}
+            <div style={{ padding: "8px 12px 0 12px", flex: 1 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <FriendsTitle title="Direct Messages" />
+                    <AddFriendButton />
                 </div>
-                <div style={{ flex: 1 }}>
-                    <CreateRoomButton isUserInRoom={props.isUserInRoom} />
-                </div>
-            </div>
-
-            <SectionDivider />
-
-            {/* Active Rooms */}
-            <div style={{ padding: "4px 12px" }}>
-                <FriendsTitle title="Active Rooms" />
-                <ActiveRooms />
-            </div>
-
-            <SectionDivider />
-
-            {/* Private Messages */}
-            <div style={{ padding: "4px 12px", flex: 1 }}>
-                <FriendsTitle title="Private Messages" />
                 <FriendsList />
             </div>
 
             <SectionDivider />
 
             {/* Group Chats */}
-            <div style={{ padding: "4px 12px" }}>
-                <FriendsTitle title="Group Chats" />
+            <div style={{ padding: "0 12px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
+                    <FriendsTitle title="Groups" />
+                    <CreateGroupChatButton />
+                </div>
                 <GroupChatList />
             </div>
 
             <SectionDivider />
 
+            {/* Active Rooms */}
+            <div style={{ padding: "0 12px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
+                    <FriendsTitle title="Active Rooms" />
+                    <CreateRoomButton isUserInRoom={props.isUserInRoom} />
+                </div>
+                <ActiveRooms />
+            </div>
+
+            <SectionDivider />
+
             {/* Pending Invitations */}
-            <div style={{ padding: "4px 12px 16px 12px" }}>
+            <div style={{ padding: "0 12px 16px 12px" }}>
                 <FriendsTitle title="Invitations" />
                 <PendingInvitationsList />
             </div>
@@ -185,7 +197,7 @@ export default function ResponsiveDrawer(props: Props) {
                 <MenuIcon fontSize="small" />
             </IconButton>
 
-            {/* Desktop expand button — visible only when sidebar is collapsed */}
+            {/* Desktop expand button */}
             {!desktopOpen && (
                 <IconButton
                     onClick={handleDesktopToggle}
@@ -196,9 +208,9 @@ export default function ResponsiveDrawer(props: Props) {
                         top: 10,
                         left: 10,
                         zIndex: 1300,
-                        color: "rgba(255,255,255,0.7)",
+                        color: "#B8C0CC",
                         background: SIDEBAR_BG,
-                        border: `1px solid ${SIDEBAR_SECTION_DIVIDER}`,
+                        border: `1px solid rgba(255,255,255,0.05)`,
                         borderRadius: "8px",
                         width: "36px",
                         height: "36px",
@@ -222,7 +234,6 @@ export default function ResponsiveDrawer(props: Props) {
                     overflow: "hidden",
                 }}
             >
-                {/* Mobile drawer */}
                 <Drawer
                     container={container}
                     variant="temporary"
@@ -241,8 +252,6 @@ export default function ResponsiveDrawer(props: Props) {
                 >
                     {drawer}
                 </Drawer>
-
-                {/* Desktop collapsible drawer */}
                 <Drawer
                     variant="persistent"
                     open={desktopOpen}
@@ -253,7 +262,7 @@ export default function ResponsiveDrawer(props: Props) {
                             width: drawerWidth,
                             background: SIDEBAR_BG,
                             border: "none",
-                            borderRight: `1px solid ${SIDEBAR_SECTION_DIVIDER}`,
+                            borderRight: `1px solid rgba(255,255,255,0.04)`,
                             transition: "transform 0.25s ease",
                             overflowX: "hidden",
                         },
@@ -270,7 +279,7 @@ export default function ResponsiveDrawer(props: Props) {
                     flexGrow: 1,
                     display: "flex",
                     flexDirection: "column",
-                    background: "#313338",
+                    background: CONTENT_BG,
                     width: {
                         xs: "100vw",
                         sm: `calc(100vw - ${effectiveDesktopWidth}px)`,
