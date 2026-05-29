@@ -16,17 +16,17 @@ const ItemButton = styled("button")<{ active: boolean }>((props) => ({
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    padding: "6px 8px",
+    padding: "8px",
     borderRadius: "8px",
     border: "none",
     cursor: "pointer",
-    background: props.active ? "rgba(88,101,242,0.2)" : "transparent",
+    background: props.active ? "rgba(91,115,255,0.14)" : "transparent",
     transition: "all 0.15s ease",
     textAlign: "left",
     marginBottom: "2px",
     position: "relative",
     "&:hover": {
-        background: props.active ? "rgba(88,101,242,0.25)" : "rgba(255,255,255,0.06)",
+        background: props.active ? "rgba(91,115,255,0.2)" : "#232C3A",
     },
 }));
 
@@ -35,17 +35,18 @@ const ActiveBar = styled("div")({
     left: "-12px",
     top: "50%",
     transform: "translateY(-50%)",
-    width: "3px",
+    width: "4px",
     height: "60%",
-    borderRadius: "0 2px 2px 0",
-    background: "#5865F2",
+    borderRadius: "0 4px 4px 0",
+    background: "#5B73FF",
 });
 
 const GroupIcon = styled("div")({
-    width: "32px",
-    height: "32px",
-    borderRadius: "50%",
-    background: "linear-gradient(135deg, #EB459E 0%, #AD1457 100%)",
+    width: "36px",
+    height: "36px",
+    borderRadius: "10px",
+    background: "linear-gradient(135deg, rgba(91,115,255,0.2) 0%, rgba(91,115,255,0.05) 100%)",
+    border: "1px solid rgba(91,115,255,0.2)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -61,14 +62,14 @@ const GroupChatListItem = ({ chat }: Props) => {
         <ItemButton active={isActive} onClick={() => dispatch(setChosenGroupChatDetails(chat))}>
             {isActive && <ActiveBar />}
             <GroupIcon>
-                <GroupsIcon sx={{ fontSize: 16, color: "white" }} />
+                <GroupsIcon sx={{ fontSize: 18, color: "#5B73FF" }} />
             </GroupIcon>
             <div style={{ flex: 1, minWidth: 0 }}>
-                <Typography style={{ fontSize: "14px", fontWeight: isActive ? 700 : 500, color: isActive ? "#ffffff" : "rgba(255,255,255,0.65)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <Typography style={{ fontSize: "14px", fontWeight: isActive ? 700 : 500, color: isActive ? "#F5F7FB" : "rgba(255,255,255,0.65)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     {chat.groupName}
                 </Typography>
-                <Typography style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)" }}>
-                    {chat.participants?.length ?? 0} members
+                <Typography style={{ fontSize: "12px", color: "#7D8795" }}>
+                    {chat.participants?.length === 1 ? "1 member" : `${chat.participants?.length ?? 0} members`}
                 </Typography>
             </div>
         </ItemButton>

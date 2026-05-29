@@ -8,23 +8,23 @@ import ResizeRoomButton from "../ResizeRoomButton";
 import { useAppSelector } from "../../../store";
 
 const Bar = styled("div")({
-    height: "56px",
+    height: "64px",
     width: "100%",
-    background: "#111214",
-    borderTop: "1px solid rgba(255,255,255,0.08)",
+    background: "#1D2430",
+    borderTop: "1px solid rgba(255,255,255,0.04)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "8px",
-    padding: "0 12px",
+    gap: "12px",
+    padding: "0 16px",
     flexShrink: 0,
 });
 
 const Divider = styled("div")({
     width: "1px",
-    height: "24px",
-    background: "rgba(255,255,255,0.1)",
-    margin: "0 4px",
+    height: "32px",
+    background: "rgba(255,255,255,0.08)",
+    margin: "0 8px",
 });
 
 const RoomButtons: React.FC<{

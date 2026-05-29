@@ -25,7 +25,7 @@ import { Typography } from "@mui/material";
 const Outer = styled("div")({
     flex: 1,
     position: "relative",
-    background: "#0d0d0f",
+    background: "#0F1115",
     overflow: "hidden",          // ← never scrolls
     minHeight: 0,
 });
@@ -45,47 +45,49 @@ const RemoteGrid = styled("div")<{ count: number }>((props) => {
         display: "grid",
         gridTemplateColumns: `repeat(${cols}, 1fr)`,
         gridAutoRows: "1fr",
-        gap: "4px",
-        padding: "4px",
-        background: "#0d0d0f",
+        gap: "12px",
+        padding: "16px",
+        background: "#0F1115",
     };
 });
 
 /* ── single remote tile fills its grid cell ─────────────────── */
 const RemoteTile = styled("div")({
     position: "relative",
-    background: "#1a1b1e",
-    borderRadius: "10px",
+    background: "#171C26",
+    borderRadius: "16px",
     overflow: "hidden",
     minHeight: 0,
     minWidth: 0,
+    border: "1px solid rgba(255,255,255,0.04)",
+    boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
 });
 
 const ParticipantLabel = styled("span")({
     position: "absolute",
-    bottom: "8px",
-    left: "10px",
+    bottom: "12px",
+    left: "12px",
     fontSize: "12px",
     fontWeight: 600,
-    color: "rgba(255,255,255,0.8)",
-    background: "rgba(0,0,0,0.55)",
+    color: "#F5F7FB",
+    background: "rgba(15,17,21,0.6)",
     borderRadius: "6px",
-    padding: "2px 8px",
-    backdropFilter: "blur(4px)",
+    padding: "4px 10px",
+    backdropFilter: "blur(8px)",
 });
 
 /* ── local PIP (picture-in-picture) box ─────────────────────── */
 const PipBox = styled("div")({
     position: "absolute",
-    bottom: "72px",              // sit above the control bar
-    right: "16px",
-    width: "160px",
-    height: "110px",
+    bottom: "84px",              // sit above the control bar
+    right: "24px",
+    width: "180px",
+    height: "120px",
     borderRadius: "12px",
     overflow: "hidden",
-    border: "2px solid rgba(255,255,255,0.15)",
-    boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
-    background: "#111214",
+    border: "2px solid rgba(91,115,255,0.3)",
+    boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
+    background: "#1D2430",
     zIndex: 10,
     "& video": {
         width: "100%",

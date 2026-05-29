@@ -16,26 +16,35 @@ const Wrapper = styled("div")({
     justifyContent: "center",
     flexDirection: "column",
     width: "100%",
+    marginTop: "24px",
 });
 
 const Label = styled("p")({
-    color: "#b9bbbe",
+    color: "#B8C0CC",
     textTransform: "uppercase",
     fontWeight: "600",
-    fontSize: "16px",
+    fontSize: "12px",
+    letterSpacing: "0.5px",
+    marginBottom: "8px",
 });
 
 const Input = styled("input")({
     flexGrow: 1,
-    height: "40px",
-    border: "1px solid black",
-    borderRadius: "5px",
-    color: "#dcddde",
-    background: "#35393f",
+    height: "44px",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "8px",
+    color: "#F5F7FB",
+    background: "rgba(255,255,255,0.04)",
     margin: 0,
-    fontSize: "16px",
-    padding: "0 5px",
+    fontSize: "15px",
+    padding: "0 14px",
     outline: "none",
+    transition: "all 0.2s ease",
+    "&:focus": {
+        border: "1px solid rgba(91,115,255,0.5)",
+        background: "rgba(255,255,255,0.06)",
+        boxShadow: "0 0 0 3px rgba(91,115,255,0.1)",
+    },
 });
 
 
@@ -68,47 +77,64 @@ const AddFriendDialog = ({
 
     return (
         <div>
-            <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
+            <Dialog open={isDialogOpen} onClose={handleCloseDialog} PaperProps={{ sx: { padding: "8px" } }}>
                 <DialogTitle>
-                    <Typography>Invite a Friend</Typography>
+                    <Typography sx={{ fontSize: "20px", fontWeight: 700, color: "#F5F7FB" }}>
+                        Invite a Friend
+                    </Typography>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        <Typography>
-                            Enter email address of friend which you would like
-                            to invite
+                        <Typography sx={{ color: "#7D8795", fontSize: "15px", lineHeight: 1.5 }}>
+                            Enter the email address of the person you'd like to invite to SyncSpace.
                         </Typography>
                     </DialogContentText>
 
                     <Wrapper>
-                        <Label>Invite your friend</Label>
+                        <Label>Email Address</Label>
                         <Input
                             type="email"
-                            placeholder="Enter email of your friend"
+                            placeholder="e.g. john@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </Wrapper>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{ padding: "16px 24px" }}>
+                    <Button
+                        variant="text"
+                        onClick={handleCloseDialog}
+                        sx={{
+                            color: "#7D8795",
+                            textTransform: "none",
+                            fontSize: "15px",
+                            fontWeight: 600,
+                            "&:hover": { color: "#F5F7FB", background: "rgba(255,255,255,0.04)" }
+                        }}
+                    >
+                        Cancel
+                    </Button>
                     <Button
                         variant="contained"
                         sx={{
-                            bgcolor: "#5865F2",
+                            bgcolor: "#5B73FF",
                             color: "white",
                             textTransform: "none",
-                            fontSize: "16px",
-                            fontWeight: 500,
-                            width: "100%",
+                            fontSize: "15px",
+                            fontWeight: 600,
                             height: "40px",
-                            marginLeft: "15px",
-                            marginRight: "15px",
-                            marginBottom: "10px",
+                            padding: "0 24px",
+                            borderRadius: "8px",
+                            boxShadow: "0 4px 12px rgba(91,115,255,0.3)",
+                            "&:hover": {
+                                bgcolor: "#6b81ff",
+                                boxShadow: "0 6px 16px rgba(91,115,255,0.4)",
+                            }
                         }}
                         disabled={!isFormValid}
                         onClick={handleClick}
                     >
-                        Invite
+                        Send Invite
                     </Button>
                 </DialogActions>
             </Dialog>
