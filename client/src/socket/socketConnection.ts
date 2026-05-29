@@ -152,6 +152,9 @@ const injectCallMessage = (content: string, otherUsername: string, otherUserId: 
 };
 
 const connectWithSocketServer = (userDetails: UserDetails) => {
+  if (socket) {
+    socket.disconnect();
+  }
   socket = io(SERVER_URL, {
     auth: { token: userDetails.token },
   });
