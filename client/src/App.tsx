@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import AlertNotification from "./components/AlertNotification"
 import { useAppSelector } from './store';
 import Loading from './components/Loading';
+import LandingPage from './pages/LandingPage';
 
 function App() {
 
@@ -29,10 +30,11 @@ function App() {
       <>
           <BrowserRouter>
               <Routes>
+                  <Route path="/" element={<LandingPage />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="*" element={<Navigate to="/dashboard" />} />
+                  <Route path="*" element={<Navigate to="/" />} />
               </Routes>
           </BrowserRouter>
           <AlertNotification />
