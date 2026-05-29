@@ -11,84 +11,57 @@ function formatTime(date: Date) {
     return `${h}:${m} ${ampm}`;
 }
 
-/**
- * Layout: 3-column grid
- *   [40% receiver] [20% gap] [40% sender]
- *
- * Receiver messages sit in the LEFT column, right-aligned within it.
- * Sender messages sit in the RIGHT column, left-aligned within it.
- * The middle 20% is always empty — creates the WhatsApp-style split.
- */
-const Row = styled("div")<{ incoming: boolean }>((props) => ({
-    display: "grid",
-    gridTemplateColumns: "40% 20% 40%",
+const MessageContainer = styled("div")<{ sameAuthor: boolean }>((props) => ({
+    display: "flex",
     width: "100%",
-    padding: "1px 12px",
-    boxSizing: "border-box",
-    // The bubble lives in col 1 (incoming) or col 3 (outgoing)
-    "& > .bubble-wrap": {
-        gridColumn: props.incoming ? "1" : "3",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: props.incoming ? "flex-start" : "flex-end",
+    padding: props.sameAuthor ? "2px 24px" : "16px 24px 2px 24px",
+    "&:hover": {
+        backgroundColor: "rgba(255,255,255,0.02)",
     },
 }));
 
-const BubbleRow = styled("div")<{ incoming: boolean }>((props) => ({
-    display: "flex",
-    flexDirection: (props.incoming ? "row" : "row-reverse") as "row" | "row-reverse",
-    alignItems: "flex-end",
-    gap: "8px",
-}));
-
 const AvatarSlot = styled("div")({
-    width: "28px",
+    width: "40px",
     flexShrink: 0,
+    marginRight: "16px",
+    display: "flex",
+    justifyContent: "center",
 });
 
-const Bubble = styled("div")<{ incoming: boolean; sameAuthor: boolean }>((props) => ({
-    /* Bubble grows with content but won't push past its column */
-    display: "inline-block",
-    maxWidth: "100%",        // constrained by the grid column (40%)
-    padding: "8px 12px",
-    borderRadius: props.incoming
-        ? props.sameAuthor ? "12px 12px 12px 4px" : "4px 12px 12px 12px"
-        : props.sameAuthor ? "12px 12px 4px 12px" : "12px 4px 12px 12px",
+const ContentArea = styled("div")({
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+});
 
-    /* Sender: solid blue, NO glow/shadow */
-    background: props.incoming ? "rgba(255,255,255,0.08)" : "#5865F2",
-    border: props.incoming ? "1px solid rgba(255,255,255,0.06)" : "none",
+const HeaderRow = styled("div")({
+    display: "flex",
+    alignItems: "baseline",
+    gap: "8px",
+    marginBottom: "4px",
+});
 
-    /* Word-wrap: never break a word mid-character; wrap the whole word to next line */
-    wordBreak: "normal",
-    overflowWrap: "break-word",   // only break if a single token exceeds the full width
-    whiteSpace: "pre-wrap",
-}));
+const AuthorName = styled("span")({
+    fontSize: "15px",
+    fontWeight: 600,
+    color: "#F5F7FB",
+});
+
+const TimeStamp = styled("span")({
+    fontSize: "12px",
+    color: "#7D8795",
+});
 
 const MsgText = styled("p")({
-    color: "rgba(255,255,255,0.93)",
-    fontSize: "14px",
-    lineHeight: 1.55,
+    color: "#B8C0CC",
+    fontSize: "15px",
+    lineHeight: 1.5,
     margin: 0,
+    wordBreak: "normal",
+    overflowWrap: "break-word",
+    whiteSpace: "pre-wrap",
 });
-
-const AuthorLabel = styled("span")({
-    fontSize: "11px",
-    fontWeight: 600,
-    color: "rgba(255,255,255,0.4)",
-    marginBottom: "3px",
-    display: "block",
-    paddingLeft: "2px",
-});
-
-const TimestampRow = styled("div")<{ incoming: boolean }>((props) => ({
-    fontSize: "10px",
-    color: "rgba(255,255,255,0.3)",
-    marginTop: "3px",
-    paddingLeft: props.incoming ? "2px" : "0",
-    paddingRight: props.incoming ? "0" : "2px",
-    textAlign: props.incoming ? "left" : "right",
-}));
 
 interface MessageProps {
     content: string;
@@ -99,28 +72,22 @@ interface MessageProps {
     isCallMessage?: boolean;
 }
 
-const Message = ({ content, sameAuthor, username, date, incomingMessage, isCallMessage }: MessageProps) => {
+const Message = ({ content, sameAuthor, username, date }: MessageProps) => {
     return (
-        <Row incoming={incomingMessage} style={{ marginTop: sameAuthor ? "2px" : "10px" }}>
-            <div className="bubble-wrap">
-                {incomingMessage && !sameAuthor && (
-                    <AuthorLabel>{username}</AuthorLabel>
+        <MessageContainer sameAuthor={sameAuthor}>
+            <AvatarSlot>
+                {!sameAuthor && <Avatar username={username} />}
+            </AvatarSlot>
+            <ContentArea>
+                {!sameAuthor && (
+                    <HeaderRow>
+                        <AuthorName>{username}</AuthorName>
+                        <TimeStamp>{formatTime(new Date(date))}</TimeStamp>
+                    </HeaderRow>
                 )}
-                <BubbleRow incoming={incomingMessage}>
-                    {incomingMessage && (
-                        <AvatarSlot>
-                            {!sameAuthor ? <Avatar username={username} /> : null}
-                        </AvatarSlot>
-                    )}
-                    <Bubble incoming={incomingMessage} sameAuthor={sameAuthor}>
-                        <MsgText>{content}</MsgText>
-                    </Bubble>
-                </BubbleRow>
-                <TimestampRow incoming={incomingMessage}>
-                    {formatTime(new Date(date))}
-                </TimestampRow>
-            </div>
-        </Row>
+                <MsgText>{content}</MsgText>
+            </ContentArea>
+        </MessageContainer>
     );
 };
 

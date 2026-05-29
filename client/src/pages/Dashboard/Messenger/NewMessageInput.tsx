@@ -7,10 +7,9 @@ import { notifyTyping, sendDirectMessage, sendGroupMessage } from "../../../sock
 const InputBar = styled("div")({
     display: "flex",
     alignItems: "center",
-    gap: "10px",
-    padding: "12px 16px",
-    background: "#313338",
-    borderTop: "1px solid rgba(255,255,255,0.06)",
+    gap: "12px",
+    padding: "16px 24px 24px 24px",
+    background: "#171C26",
     flexShrink: 0,
 });
 
@@ -18,15 +17,15 @@ const InputWrapper = styled("div")({
     flex: 1,
     display: "flex",
     alignItems: "center",
-    background: "rgba(255,255,255,0.07)",
+    background: "#1D2430",
     borderRadius: "12px",
-    border: "1px solid rgba(255,255,255,0.08)",
-    padding: "0 14px",
+    border: "1px solid rgba(255,255,255,0.04)",
+    padding: "4px 8px 4px 16px",
     transition: "all 0.2s ease",
     "&:focus-within": {
-        border: "1px solid rgba(88,101,242,0.5)",
-        background: "rgba(255,255,255,0.09)",
-        boxShadow: "0 0 0 3px rgba(88,101,242,0.1)",
+        border: "1px solid rgba(91,115,255,0.5)",
+        background: "#232B38",
+        boxShadow: "0 0 0 3px rgba(91,115,255,0.1)",
     },
 });
 
@@ -36,31 +35,31 @@ const Input = styled("input")({
     background: "transparent",
     border: "none",
     outline: "none",
-    color: "#ffffff",
+    color: "#F5F7FB",
     fontSize: "15px",
     "&::placeholder": {
-        color: "rgba(255,255,255,0.3)",
+        color: "#7D8795",
     },
 });
 
 const SendBtn = styled("button")<{ active: boolean }>((props) => ({
     width: "40px",
     height: "40px",
-    borderRadius: "10px",
+    borderRadius: "8px",
     border: "none",
     cursor: props.active ? "pointer" : "default",
     background: props.active
-        ? "linear-gradient(135deg, #5865F2 0%, #4752C4 100%)"
-        : "rgba(255,255,255,0.06)",
+        ? "#5B73FF"
+        : "rgba(255,255,255,0.04)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
     transition: "all 0.2s ease",
-    boxShadow: props.active ? "0 4px 12px rgba(88,101,242,0.35)" : "none",
     "&:hover": {
-        transform: props.active ? "scale(1.05)" : "none",
-        boxShadow: props.active ? "0 6px 16px rgba(88,101,242,0.45)" : "none",
+        transform: props.active ? "translateY(-1px)" : "none",
+        background: props.active ? "#6b81ff" : "rgba(255,255,255,0.06)",
+        boxShadow: props.active ? "0 4px 12px rgba(91,115,255,0.3)" : "none",
     },
 }));
 
