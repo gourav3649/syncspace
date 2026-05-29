@@ -89,11 +89,15 @@ const chatReducer: Reducer<ChatState, ChatActions> = (
                 messages: action.payload,
             };
 
-        case actionTypes.addNewMessage:
+        case actionTypes.addNewMessage: {
+            const isDuplicate = state.messages.some(msg => msg._id === action.payload._id);
+            if (isDuplicate) return state;
+
             return {
                 ...state,
                 messages: [...state.messages, action.payload],
             };
+        }
 
         case actionTypes.setInitialTypingStatus:
             return {
