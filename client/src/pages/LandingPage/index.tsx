@@ -7,33 +7,10 @@ const Container = styled("div")({
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#0F1115",
-    color: "#FFFFFF",
+    backgroundColor: "#111214", // Deeper, more authentic dark
+    color: "#F2F3F5",
     overflow: "hidden",
-    position: "relative",
     fontFamily: "'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif",
-});
-
-const BackgroundBlob = styled(motion.div)({
-    position: "absolute",
-    width: "60vw",
-    height: "60vw",
-    borderRadius: "50%",
-    filter: "blur(100px)",
-    opacity: 0.15,
-    zIndex: 0,
-});
-
-const Blob1 = styled(BackgroundBlob)({
-    top: "-10%",
-    left: "-10%",
-    background: "linear-gradient(135deg, #5865F2, #8E2DE2)",
-});
-
-const Blob2 = styled(BackgroundBlob)({
-    bottom: "-20%",
-    right: "-10%",
-    background: "linear-gradient(135deg, #00C9FF, #92FE9D)",
 });
 
 const ContentWrapper = styled("div")({
@@ -45,6 +22,24 @@ const ContentWrapper = styled("div")({
     padding: "20px",
     zIndex: 1,
     textAlign: "center",
+    position: "relative",
+});
+
+const GridOverlay = styled("div")({
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundImage: `
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+    `,
+    backgroundSize: "60px 60px",
+    maskImage: "radial-gradient(circle at center, black 0%, transparent 80%)",
+    WebkitMaskImage: "radial-gradient(circle at center, black 0%, transparent 80%)",
+    pointerEvents: "none",
+    zIndex: -1,
 });
 
 const Nav = styled("nav")({
@@ -61,12 +56,10 @@ const Nav = styled("nav")({
 });
 
 const LogoText = styled("div")({
-    fontSize: "24px",
+    fontSize: "20px",
     fontWeight: 800,
     letterSpacing: "-0.5px",
-    background: "linear-gradient(90deg, #FFFFFF, #B9BCC3)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
+    color: "#FFFFFF",
     display: "flex",
     alignItems: "center",
     gap: "10px",
@@ -78,45 +71,46 @@ const NavActions = styled("div")({
 });
 
 const NavLoginBtn = styled("button")({
-    background: "transparent",
-    color: "#FFFFFF",
+    background: "#FFFFFF",
+    color: "#111214",
     border: "none",
-    fontSize: "15px",
+    fontSize: "14px",
     fontWeight: 600,
     cursor: "pointer",
     padding: "8px 16px",
-    borderRadius: "8px",
-    transition: "background 0.2s",
+    borderRadius: "20px",
+    transition: "background 0.2s, color 0.2s",
     "&:hover": {
-        background: "rgba(255, 255, 255, 0.05)",
+        background: "#F2F3F5",
+        color: "#000000",
     },
 });
 
 const Title = styled(motion.h1)({
-    fontSize: "clamp(40px, 8vw, 80px)",
-    fontWeight: 800,
+    fontSize: "clamp(36px, 6vw, 64px)",
+    fontWeight: 900,
     lineHeight: 1.1,
-    letterSpacing: "-0.02em",
+    letterSpacing: "-0.04em",
     marginBottom: "24px",
     maxWidth: "800px",
+    color: "#FFFFFF",
     "& span": {
-        background: "linear-gradient(135deg, #5865F2 0%, #4752C4 100%)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
+        color: "#5865F2", // Core accent color
     },
 });
 
 const Subtitle = styled(motion.p)({
     fontSize: "clamp(16px, 2vw, 20px)",
-    color: "#949BA4",
+    color: "#B5BAC1",
     maxWidth: "600px",
     lineHeight: 1.6,
-    marginBottom: "48px",
+    marginBottom: "40px",
+    fontWeight: 400,
 });
 
 const ActionButtonGroup = styled(motion.div)({
     display: "flex",
-    gap: "20px",
+    gap: "16px",
     "@media (max-width: 600px)": {
         flexDirection: "column",
         width: "100%",
@@ -125,31 +119,22 @@ const ActionButtonGroup = styled(motion.div)({
 });
 
 const PrimaryButton = styled(motion.button)({
-    background: "linear-gradient(135deg, #5865F2 0%, #4752C4 100%)",
+    background: "#5865F2",
     color: "#FFFFFF",
     border: "none",
-    borderRadius: "12px",
+    borderRadius: "28px",
     padding: "16px 32px",
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: 600,
     cursor: "pointer",
-    boxShadow: "0 8px 24px rgba(88, 101, 242, 0.3)",
-    transition: "box-shadow 0.2s",
+    transition: "background 0.2s",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
     "&:hover": {
-        boxShadow: "0 12px 32px rgba(88, 101, 242, 0.4)",
+        background: "#4752C4",
     },
-});
-
-const SecondaryButton = styled(motion.button)({
-    background: "rgba(255, 255, 255, 0.05)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    borderRadius: "12px",
-    padding: "16px 32px",
-    fontSize: "16px",
-    fontWeight: 600,
-    cursor: "pointer",
-    backdropFilter: "blur(10px)",
 });
 
 
@@ -158,21 +143,6 @@ const LandingPage: React.FC = () => {
 
     return (
         <Container>
-            <Blob1 
-                animate={{ 
-                    scale: [1, 1.1, 1],
-                    opacity: [0.15, 0.2, 0.15],
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <Blob2 
-                animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.15, 0.1],
-                }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            />
-
             <Nav>
                 <LogoText>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -183,49 +153,42 @@ const LandingPage: React.FC = () => {
                     SyncSpace
                 </LogoText>
                 <NavActions>
-                    <NavLoginBtn onClick={() => navigate("/login")}>Log In</NavLoginBtn>
+                    <NavLoginBtn onClick={() => navigate("/login")}>Login</NavLoginBtn>
                 </NavActions>
             </Nav>
 
             <ContentWrapper>
+                <GridOverlay />
+                
                 <Title
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                 >
-                    Connect effortlessly. <br />
-                    <span>Collaborate anywhere.</span>
+                    A place to <span>sync</span> and collaborate.
                 </Title>
                 
                 <Subtitle
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                 >
-                    Experience seamless video calls, instant messaging, and real-time collaboration 
-                    designed for modern teams and communities.
+                    High-quality video calls, instant messaging, and seamless collaboration. 
+                    Built for teams and communities that demand more from their workspace.
                 </Subtitle>
 
                 <ActionButtonGroup
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                 >
                     <PrimaryButton 
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => navigate("/register")}
                     >
-                        Get Started for Free
+                        Open SyncSpace in your browser
                     </PrimaryButton>
-                    
-                    <SecondaryButton
-                        whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => navigate("/login")}
-                    >
-                        Sign In
-                    </SecondaryButton>
                 </ActionButtonGroup>
             </ContentWrapper>
         </Container>
