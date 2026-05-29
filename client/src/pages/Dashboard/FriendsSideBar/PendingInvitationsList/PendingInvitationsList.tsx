@@ -49,11 +49,26 @@ const MainContainer = styled("div")({
     margin: "10px 0",
 });
 
+const EmptyState = styled("div")({
+  color: "#7D8795",
+  fontSize: "13px",
+  padding: "16px 8px",
+  textAlign: "center",
+  background: "rgba(255,255,255,0.02)",
+  borderRadius: "8px",
+  margin: "4px 0 16px 0",
+});
+
 const PendingInvitationsList = () => {
   const { pendingInvitations } = useAppSelector((state) => state.friends);
 
   return (
     <MainContainer>
+      {pendingInvitations.length === 0 && (
+          <EmptyState>
+              No pending invitations.
+          </EmptyState>
+      )}
       {pendingInvitations.map((invitation) => (
         <PendingInvitationsListItem
           key={invitation._id}

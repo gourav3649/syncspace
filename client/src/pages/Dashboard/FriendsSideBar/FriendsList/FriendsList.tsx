@@ -27,6 +27,16 @@ const MainContainer = styled("div")({
   margin: "20px 0"
 });
 
+const EmptyState = styled("div")({
+  color: "#7D8795",
+  fontSize: "13px",
+  padding: "16px 8px",
+  textAlign: "center",
+  background: "rgba(255,255,255,0.02)",
+  borderRadius: "8px",
+  margin: "4px 0 16px 0",
+});
+
 const FriendsList = () => {
   const { friends, onlineUsers } = useAppSelector(state => state.friends);
 
@@ -38,6 +48,11 @@ const FriendsList = () => {
 
   return (
     <MainContainer>
+      {modifiedFriends.length === 0 && (
+          <EmptyState>
+              No direct messages yet.
+          </EmptyState>
+      )}
       {modifiedFriends.map((f) => (
         <FriendsListItem
           username={f.username}

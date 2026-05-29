@@ -37,12 +37,36 @@ const ScrollArea = styled("div")({
 });
 
 const ConversationStart = styled("div")({
-    padding: "24px 16px 8px 16px",
-    color: "rgba(255,255,255,0.35)",
-    fontSize: "13px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "48px 16px 32px 16px",
+    color: "#B8C0CC",
+    fontSize: "14px",
     textAlign: "center",
-    borderBottom: "1px solid rgba(255,255,255,0.06)",
-    marginBottom: "8px",
+    borderBottom: "1px solid rgba(255,255,255,0.04)",
+    marginBottom: "24px",
+});
+
+const AvatarPlaceholder = styled("div")({
+    width: "80px",
+    height: "80px",
+    borderRadius: "50%",
+    background: "rgba(91,115,255,0.1)",
+    color: "#5B73FF",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "32px",
+    marginBottom: "16px",
+});
+
+const ConversationTitle = styled("h3")({
+    color: "#F5F7FB",
+    fontSize: "24px",
+    fontWeight: 700,
+    margin: "0 0 8px 0",
 });
 
 const Messages = () => {
@@ -82,9 +106,19 @@ const Messages = () => {
             <MessagesHeader scrollPosition={scrollPosition} />
             <ScrollArea onScroll={handleScroll}>
                 <ConversationStart>
-                    {chosenChatDetails?.userId
-                        ? `✨ Start of your conversation with ${chosenChatDetails?.username}`
-                        : `✨ Start of the group conversation`}
+                    <AvatarPlaceholder>
+                        {chosenChatDetails?.userId ? "👤" : "👥"}
+                    </AvatarPlaceholder>
+                    <ConversationTitle>
+                        {chosenChatDetails?.userId
+                            ? chosenChatDetails?.username
+                            : chosenGroupChatDetails?.groupName || "Group Chat"}
+                    </ConversationTitle>
+                    <div>
+                        {chosenChatDetails?.userId
+                            ? `This is the beginning of your direct message history with ${chosenChatDetails?.username}.`
+                            : `Welcome to the start of the ${chosenGroupChatDetails?.groupName || "group"} conversation.`}
+                    </div>
                 </ConversationStart>
 
                 {messages.map((message, index) => {

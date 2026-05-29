@@ -1,14 +1,10 @@
 import React from "react";
 import { styled, keyframes } from "@mui/system";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-const float = keyframes`
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-`;
-
-const pulse = keyframes`
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(0.97); }
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
 const Wrapper = styled("div")({
@@ -18,68 +14,91 @@ const Wrapper = styled("div")({
     alignItems: "center",
     justifyContent: "center",
     padding: "24px",
-    textAlign: "center",
-    background: "#313338",
-    gap: "16px",
+    background: "#171C26",
+    height: "100%",
 });
 
-const IconRing = styled("div")({
-    width: "96px",
-    height: "96px",
+const Card = styled("div")({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "48px",
+    background: "#1D2430",
+    borderRadius: "24px",
+    border: "1px solid rgba(255,255,255,0.04)",
+    boxShadow: "0 24px 48px rgba(0,0,0,0.2)",
+    textAlign: "center",
+    maxWidth: "400px",
+    animation: `${fadeIn} 0.4s cubic-bezier(0.16, 1, 0.3, 1)`,
+});
+
+const IconCircle = styled("div")({
+    width: "72px",
+    height: "72px",
     borderRadius: "50%",
-    background: "rgba(88,101,242,0.12)",
-    border: "2px solid rgba(88,101,242,0.2)",
+    background: "rgba(91,115,255,0.1)",
+    color: "#5B73FF",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "42px",
-    animation: `${float} 4s ease-in-out infinite`,
+    marginBottom: "24px",
 });
 
 const Title = styled("h2")({
-    color: "#ffffff",
-    fontSize: "22px",
+    color: "#F5F7FB",
+    fontSize: "20px",
     fontWeight: 700,
-    margin: 0,
-    letterSpacing: "-0.3px",
+    margin: "0 0 12px 0",
+    letterSpacing: "-0.01em",
 });
 
 const Subtitle = styled("p")({
-    color: "rgba(255,255,255,0.4)",
+    color: "#B8C0CC",
     fontSize: "15px",
-    maxWidth: "320px",
-    margin: 0,
-    lineHeight: 1.6,
+    margin: "0 0 32px 0",
+    lineHeight: 1.5,
 });
 
-const Hint = styled("div")({
+const ActionRow = styled("div")({
     display: "flex",
     alignItems: "center",
-    gap: "8px",
-    background: "rgba(88,101,242,0.1)",
-    border: "1px solid rgba(88,101,242,0.2)",
-    borderRadius: "10px",
-    padding: "10px 16px",
-    marginTop: "8px",
+    gap: "12px",
+    width: "100%",
 });
 
-const HintText = styled("span")({
-    color: "rgba(255,255,255,0.5)",
-    fontSize: "13px",
+const PrimaryHint = styled("div")({
+    flex: 1,
+    background: "#5B73FF",
+    color: "#ffffff",
+    padding: "12px 16px",
+    borderRadius: "12px",
+    fontSize: "14px",
+    fontWeight: 600,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    transition: "background 0.2s",
 });
 
 const WelcomeMessage = () => {
     return (
         <Wrapper>
-            <IconRing>💬</IconRing>
-            <Title>No conversation selected</Title>
-            <Subtitle>
-                Pick a friend from the sidebar to start chatting, or invite someone new!
-            </Subtitle>
-            <Hint>
-                <span>👈</span>
-                <HintText>Select a friend or group from the left panel</HintText>
-            </Hint>
+            <Card>
+                <IconCircle>
+                    <ChatBubbleOutlineIcon sx={{ fontSize: 32 }} />
+                </IconCircle>
+                <Title>Your Workspace</Title>
+                <Subtitle>
+                    Select a conversation from the sidebar, or create a new group to start collaborating.
+                </Subtitle>
+                <ActionRow>
+                    <PrimaryHint>
+                        Select a conversation
+                    </PrimaryHint>
+                </ActionRow>
+            </Card>
         </Wrapper>
     );
 };
