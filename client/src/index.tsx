@@ -7,53 +7,91 @@ import { Provider } from 'react-redux';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import * as serviceWorker from './serviceWorker';
 
-const professionalTheme = createTheme({
+const premiumDarkTheme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#4A154B', // Slack-like indigo
-      light: '#611f69',
-      dark: '#350d36',
+      main: '#5B73FF',
+      light: '#7B8DFF',
+      dark: '#4A62EE',
     },
     secondary: {
-      main: '#36C5F0', // Slack-like baby blue
+      main: '#22C55E', // Success/online
     },
     background: {
-      default: '#F4F5F7',
-      paper: '#FFFFFF',
+      default: '#0F1115', // App background
+      paper: '#1D2430', // Elevated surfaces, modals
     },
     text: {
-      primary: '#1D1C1D',
-      secondary: '#616061',
+      primary: '#F5F7FB',
+      secondary: '#B8C0CC',
     },
+    error: { main: '#EF4444' },
+    warning: { main: '#F59E0B' },
+    success: { main: '#22C55E' },
+    info: { main: '#38BDF8' },
   },
   typography: {
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      'Inter',
       '"Segoe UI"',
       'Roboto',
       '"Helvetica Neue"',
       'Arial',
       'sans-serif',
     ].join(','),
-    h1: { fontWeight: 700 },
-    h2: { fontWeight: 700 },
-    h3: { fontWeight: 600 },
-    button: { textTransform: 'none', fontWeight: 600 },
+    button: { textTransform: 'none', fontWeight: 500 },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 12,
   },
   components: {
     MuiButton: {
+      defaultProps: { disableElevation: true, disableRipple: true },
       styleOverrides: {
         root: {
-          padding: '8px 24px',
-          boxShadow: 'none',
+          borderRadius: 8,
+          padding: '8px 16px',
+        },
+      },
+    },
+    MuiIconButton: {
+      defaultProps: { disableRipple: true },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#1D2430',
+          backgroundImage: 'none',
+          borderRadius: 16,
+          boxShadow: '0 24px 48px rgba(0,0,0,0.4)',
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#1D2430',
+          backgroundImage: 'none',
+          borderRadius: 12,
+          border: '1px solid rgba(255,255,255,0.08)',
+        },
+      },
+    },
+    MuiMenuItem: {
+      defaultProps: { disableRipple: true },
+      styleOverrides: {
+        root: {
           '&:hover': {
-            boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+            backgroundColor: '#232C3A',
           },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
         },
       },
     },
@@ -63,7 +101,7 @@ const professionalTheme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={professionalTheme}>
+      <ThemeProvider theme={premiumDarkTheme}>
         <CssBaseline />
         <App />
       </ThemeProvider>
